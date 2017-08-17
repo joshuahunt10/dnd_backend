@@ -14,6 +14,12 @@ const nodeEnv = process.env.NODE_ENV || "development";
 
 const apiUserRoutes = require('./routes/apiUserRoutes')
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 app.use(apiUserRoutes)
 
 app.listen(4000, function(){
@@ -27,4 +33,91 @@ app.listen(4000, function(){
 //   bio: 'this is a test profile'
 // })
 //
+// user.save()
+
+// const char = models.Characters.build({
+//   charName: 'josh char',
+//   race: 'dwarf',
+//   class: 'paladin',
+//   userID: 1
+// })
+//
+// char.save()
+
+// const game = models.Games.build({
+//   title: 'test game',
+//   admin: 1
+// })
+//
+// game.save()
+
+// const join = models.GamesJoin.build({
+//   gamesID:1,
+//   userID: 1,
+//   charID: 1,
+// })
+//
+// join.save()
+
+
+//The below query will return the character information and the user information and print it out.  If I add console.log(char.User) then it will print only the user information.  So I found the character information but only printed the user associated with it.
+// models.Characters.findOne({
+//   include: [
+//     {
+//       model: models.User,
+//       as: 'User'
+//     }
+//   ]
+// }).then(function(char){
+//   console.log(char.User)
+// })
+
+// models.User.findOne({
+//   include:[
+//     {
+//       model: models.Characters,
+//       as: 'Character'
+//     }
+//   ]
+// }).then(function(user){
+//   console.log(user.Character[0].dataValues); //This returns the user's characters as an array then dataValues is the actual object with the character data.
+// })
+
+// models.Games.findOne({
+//   include:[
+//     {
+//       model: models.User
+//
+//     },
+//     {
+//       model: models.Characters,
+//     }
+//   ]
+// }).then(function(game){
+//   console.log(game);
+// })
+
+// models.User.findOne({
+//   include:[
+//     {model: models.Games},
+//     {model: models.Characters}
+//   ]
+// }).then(function(user){
+//   console.log(user);
+// })
+
+// models.Characters.findOne({
+//   include:[
+//     {model: models.Games},
+//     {model: models.User}
+//   ]
+// }).then(function(char){
+//   console.log(char);
+// })
+
+
+
+
+
+
 // user.save()
