@@ -2,10 +2,15 @@ const express = require('express');
 const app = express();
 const mustache = require("mustache-express");
 const models = require("./models")
+const morgan = require('morgan');
 const bodyparser = require("body-parser");
+const jwt = require('jsonwebtoken')
+const jwtSecret = process.env.JWT_SECRET || "JOSHRULES5EVA";
+
 
 app.engine('mustache', mustache());
 app.set('view engine', 'mustache');
+app.set('secret', jwtSecret);
 app.use(express.static('public'));
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({extended: false}))
@@ -13,6 +18,8 @@ app.use(bodyparser.urlencoded({extended: false}))
 const nodeEnv = process.env.NODE_ENV || "development";
 
 const apiUserRoutes = require('./routes/apiUserRoutes')
+
+app.use(morgan('dev'));
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
