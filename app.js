@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const bodyparser = require("body-parser");
 const jwt = require('jsonwebtoken')
 const jwtSecret = process.env.JWT_SECRET || "JOSHRULES5EVA";
+const passport = require('passport');
 
 
 app.engine('mustache', mustache());
@@ -18,8 +19,13 @@ app.use(bodyparser.urlencoded({extended: false}))
 const nodeEnv = process.env.NODE_ENV || "development";
 
 const apiUserRoutes = require('./routes/apiUserRoutes')
+const apiAuthUserRoutes = require('./routes/apiAuthUserRoutes')
 
 app.use(morgan('dev'));
+
+app.use(passport.initialize())
+
+require('./config/passport')(passport)
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -28,9 +34,16 @@ app.use(function(req, res, next) {
 });
 
 app.use(apiUserRoutes)
+app.use(passport.authenticate('jwt', { session: false }), function(req, res, next){
+  console.log('in the middlweare');
+  next()
+})
+app.use(apiAuthUserRoutes)
+
+
 
 app.listen(4000, function(){
-  console.log('I\'m going to get sick of DnD by the end of this');
+  console.log('I\'m going to get sick of DnD by the end of this')
 })
 
 // const user = models.User.build({

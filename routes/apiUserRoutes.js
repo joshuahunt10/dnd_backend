@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const models = require('../models')
 const jwt = require('jsonwebtoken')
+const secret = require('../config/main')
 
 
 
@@ -41,12 +42,11 @@ router.post('/api/authenticate', function(req, res){
   }).then(function(u){
     if(email === u.email){
       if(password === u.password){
-        const secret = req.app.get('secret')
-        console.log(secret);
+        console.log('secret from auth route', secret.secret);
         var token = jwt.sign({
           exp: Math.floor(Date.now() / 1000) + (60 * 60),
           data: u
-        }, secret);
+        }, secret.secret);
 
         res.json({
           success:true,
