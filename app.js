@@ -34,8 +34,10 @@ app.use(function(req, res, next) {
 });
 
 app.use(apiUserRoutes)
-app.use(passport.authenticate('jwt', { session: false }), function(req, res, next){
-  console.log('in the middlweare');
+app.use(
+  passport.authenticate('jwt', { session: false }), function(req, res, next){
+  console.log('log req.header', req.headers)
+  console.log('in the middlweare')
   next()
 })
 app.use(apiAuthUserRoutes)

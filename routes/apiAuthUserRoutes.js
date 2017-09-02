@@ -9,4 +9,11 @@ router.get('/api/user/info', function(req, res){
   })
 })
 
+router.post('/api/user/char/create', function(req, res){
+  console.log('route working')
+  res.json({
+    success: true
+  })
+})
+
 module.exports = router;
