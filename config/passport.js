@@ -10,13 +10,11 @@ module.exports = function(passport){
 
   opts.secretOrKey = config.secret;
   passport.use(new JwtStrategy(opts, function(jwt_payload, done){
-    console.log('in the passport Strategy before the db query', jwt_payload.data.email);
     models.User.findOne({
       where:{
         email: jwt_payload.data.email
       }
     }).then(function(user){
-      console.log('user in the passport.js',user);
       if(user){
         done(null, user)
       } else{

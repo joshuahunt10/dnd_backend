@@ -9,13 +9,54 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       charName: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       race: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
       class: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      str: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      dex: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      con: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      int: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      wis: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      skillProf: {
+        type: Sequelize.ARRAY(Sequelize.STRING)
+      },
+      subClass: {
         type: Sequelize.STRING
+      },
+      subRace: {
+        type: Sequelize.STRING
+      },
+      alignment: {
+        type: Sequelize.STRING
+      },
+      background: {
+        type: Sequelize.STRING
+      },
+      level: {
+        type: Sequelize.TEXT
       },
       createdAt: {
         allowNull: false,

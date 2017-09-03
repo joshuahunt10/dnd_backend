@@ -5,18 +5,6 @@ const jwt = require('jsonwebtoken')
 const secret = require('../config/main')
 
 
-
-
-// router.get('/api/user', function(req, res){
-//   models.User.findOne({
-//     where:{
-//       name: req.body.name;
-//     }
-//   }).then(function(user){
-//     res.json({user})
-//   })
-// })
-
 router.post('/api/register', function(req, res){
   const user = models.User.build({
     name: req.body.name,

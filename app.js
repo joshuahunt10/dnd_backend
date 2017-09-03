@@ -1,4 +1,5 @@
 const express = require('express');
+var cors = require('cors')
 const app = express();
 const mustache = require("mustache-express");
 const models = require("./models")
@@ -27,16 +28,9 @@ app.use(passport.initialize())
 
 require('./config/passport')(passport)
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
-
+app.use(cors())
 app.use(apiUserRoutes)
-app.use(
-  passport.authenticate('jwt', { session: false }), function(req, res, next){
-  console.log('log req.header', req.headers)
+app.use(passport.authenticate('jwt', { session: false }), function(req, res, next){
   console.log('in the middlweare')
   next()
 })
