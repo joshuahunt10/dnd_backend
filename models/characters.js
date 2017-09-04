@@ -19,7 +19,6 @@ module.exports = function(sequelize, DataTypes) {
 
   Characters.associate = function(models){
     Characters.belongsTo(models.User, {
-
       foreignKey: 'userID'
     })
     Characters.belongsToMany(models.Games, {
