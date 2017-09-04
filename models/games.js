@@ -8,10 +8,10 @@ module.exports = function(sequelize, DataTypes) {
   Games.associate = function(models){
     Games.belongsTo(models.Characters, {
       through: 'GamesJoin',
-      foreignKey: 'charID',
+      foreignKey: 'charID'
 
     }),
-    Games.belongsTo(models.User, {
+    Games.belongsToMany(models.User, {
       through: 'GamesJoin',
       foreignKey: 'userID'
     })

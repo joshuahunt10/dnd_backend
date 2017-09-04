@@ -23,6 +23,7 @@ router.post('/api/register', function(req, res){
 router.post('/api/authenticate', function(req, res){
   let email = req.body.email
   let password = req.body.password
+  console.log(email);
   models.User.findOne({
     where:{
       email: email

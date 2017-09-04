@@ -13,7 +13,6 @@ module.exports = function(sequelize, DataTypes) {
       foreignKey: 'userID'
     }),
     User.belongsToMany(models.Games, {
-
       through: 'GamesJoin',
       foreignKey: 'userID'
     })
