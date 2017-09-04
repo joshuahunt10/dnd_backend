@@ -6,12 +6,12 @@ module.exports = function(sequelize, DataTypes) {
   }, {});
 
   Games.associate = function(models){
-    Games.belongsToMany(models.Characters, {
+    Games.belongsTo(models.Characters, {
       through: 'GamesJoin',
       foreignKey: 'charID',
 
     }),
-    Games.belongsToMany(models.User, {
+    Games.belongsTo(models.User, {
       through: 'GamesJoin',
       foreignKey: 'userID'
     })

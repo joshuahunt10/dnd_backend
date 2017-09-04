@@ -23,7 +23,6 @@ router.get('/api/user', function(req, res){
 router.post('/api/user/char/create', function(req, res){
   let decoded = jwtDecode(req.headers.token)
   let userID = decoded.data.id
-  console.log(req.body);
   const char = models.Characters.build({
     charName: req.body.charName,
     race: req.body.race,
@@ -53,6 +52,57 @@ router.post('/api/user/char/create', function(req, res){
     res.json({
       success: false,
       err: err
+    })
+  })
+})
+
+router.get('/api/user/games', function(req, res){
+  let decoded = jwtDecode(req.headers.token)
+  let userID = decoded.data.id
+  models.Games.findAll({
+    include:[
+      {
+        model: models.User
+
+      },
+      {
+        model: models.Characters,
+      }
+    ]
+  }).then(function(game){
+    res.json(game);
+  })
+})
+
+router.post('/api/user/games/create', function(req, res){
+  let decoded = jwtDecode(req.headers.token)
+  let userID = decoded.data.id
+
+  const game = models.Games.build({
+    title: req.body.title,
+    admin: userID
+  })
+  game.save().then(function(game){
+    // res.json(game);
+    const join = models.GamesJoin.build({
+      gamesID: game.id, //How do I get this?
+      userID: userID,
+      charID: req.body.charID,
+    })
+    join.save()
+    .then(function(join){
+      models.User.findOne({
+        where:{
+          id: userID
+        },
+        include:
+          {model: models.Games}
+      })
+      .then(function(user){
+        res.json(user);
+      })
+
+
     })
   })
 })
