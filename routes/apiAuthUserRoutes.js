@@ -7,16 +7,34 @@ var jwtDecode = require('jwt-decode');
 router.get('/api/user', function(req, res){
   let decoded = jwtDecode(req.headers.token)
   let userID = decoded.data.id
-  models.User.findOne({
+  models.Users.findOne({
     where:{
       id: userID
     },
     include:[
-      {model: models.Games},
       {model: models.Characters}
     ]
   }).then(function(user){
-    res.json(user);
+    console.log(user);
+
+    const gameIds = user.Characters.map( c => c.GameId )
+
+    models.Games.find({
+      where: {id: gameIds}
+      }).then( games => {
+        if (games) {
+          user.Games = games
+        } else {
+          user.Games = []
+        }
+
+        // console.log({user})
+        /// TODO figure out how to get user to
+        ///   serialize Games in addition to Characters
+
+        res.json(user)
+    })
+
   })
 })
 
@@ -56,15 +74,15 @@ router.post('/api/user/char/create', function(req, res){
   })
 })
 
-router.get('/api/user/games', function(req, res){
+router.get('/api/games', function(req, res){
   let decoded = jwtDecode(req.headers.token)
   let userID = decoded.data.id
   models.Games.findAll({
     include:[
-      {
-        model: models.User
-
-      },
+    //   {
+    //     model: models.Users
+    //
+    //   },
       {
         model: models.Characters,
       }
@@ -74,36 +92,19 @@ router.get('/api/user/games', function(req, res){
   })
 })
 
-router.post('/api/user/games/create', function(req, res){
+router.post('/api/games/create', function(req, res){
   let decoded = jwtDecode(req.headers.token)
   let userID = decoded.data.id
 
   const game = models.Games.build({
     title: req.body.title,
-    admin: userID
+    adminUserId: userID
   })
   game.save().then(function(game){
-    // res.json(game);
-    const join = models.GamesJoin.build({
-      gamesID: game.id, //How do I get this?
-      userID: userID,
-      charID: req.body.charID,
-    })
-    join.save()
-    .then(function(join){
-      models.User.findOne({
-        where:{
-          id: userID
-        },
-        include:
-          {model: models.Games}
-      })
-      .then(function(user){
-        res.json(user);
-      })
-
-
-    })
+    res.json({
+      'Game Created': true,
+      'Game Name': game.title
+    });
   })
 })
 

@@ -15,18 +15,14 @@ module.exports = function(sequelize, DataTypes) {
     alignment: DataTypes.STRING,
     background: DataTypes.STRING,
     level: DataTypes.INTEGER,
+    UserId: DataTypes.INTEGER,
+    GameId: DataTypes.INTEGER
   }, {});
 
   Characters.associate = function(models){
-    Characters.belongsTo(models.User, {
-      foreignKey: 'userID'
-    })
-    Characters.belongsToMany(models.Games, {
+    Characters.belongsTo(models.Users)
+    Characters.belongsTo(models.Games)
 
-      through: "GamesJoin",
-      foreignKey: "charID",
-      otherKey: 'charID' //if deleted the query for user not work
-    })
   }
   return Characters;
 };

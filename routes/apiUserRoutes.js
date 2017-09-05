@@ -6,7 +6,7 @@ const secret = require('../config/main')
 
 
 router.post('/api/register', function(req, res){
-  const user = models.User.build({
+  const user = models.Users.build({
     name: req.body.name,
     password: req.body.password,
     email: req.body.email,
@@ -23,7 +23,7 @@ router.post('/api/register', function(req, res){
 router.post('/api/authenticate', function(req, res){
   let email = req.body.email
   let password = req.body.password
-  models.User.findOne({
+  models.Users.findOne({
     where:{
       email: email
     }

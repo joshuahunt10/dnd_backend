@@ -12,21 +12,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      // userID: {
-      //   type: Sequelize.INTEGER,
-      //   references: {
-      //     model: 'GamesJoin',
-      //     key: 'id'
-      //   }
-      // },
-      // charID: {
-      //   type: Sequelize.INTEGER,
-      //   references: {
-      //     model: 'Characters',
-      //     key: 'id'
-      //   }
-      // },
-      admin: {
+      adminUserId: {
         type: Sequelize.INTEGER,
         allowNull: false
       },

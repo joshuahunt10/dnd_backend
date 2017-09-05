@@ -2,19 +2,11 @@
 module.exports = function(sequelize, DataTypes) {
   var Games = sequelize.define('Games', {
     title: DataTypes.STRING,
-    admin: DataTypes.INTEGER
+    adminUserId: DataTypes.INTEGER
   }, {});
 
   Games.associate = function(models){
-    Games.belongsToMany(models.Characters, {
-      through: 'GamesJoin',
-      foreignKey: 'charID',
-
-    }),
-    Games.belongsToMany(models.User, {
-      through: 'GamesJoin',
-      foreignKey: 'userID'
-    })
+    Games.hasMany(models.Characters)
   }
 
   return Games;
