@@ -56,7 +56,8 @@ router.post('/api/user/char/create', function(req, res){
     background: req.body.background,
     level: req.body.level,
     skillProf: req.body.skillProf,
-    userID: userID
+    GameId: req.body.GameId,
+    UserId: userID
   })
   char.save().then(function(){
     res.json({
@@ -78,6 +79,25 @@ router.get('/api/games', function(req, res){
   let decoded = jwtDecode(req.headers.token)
   let userID = decoded.data.id
   models.Games.findAll({
+    include:[
+    //   {
+    //     model: models.Users
+    //
+    //   },
+      {
+        model: models.Characters,
+      }
+    ]
+  }).then(function(game){
+    res.json(game);
+  })
+})
+
+router.post('/api/games/details', function(req, res){
+  let decoded = jwtDecode(req.headers.token)
+  let userID = decoded.data.id
+  models.Games.findOne({
+    where: {id: req.body.id},
     include:[
     //   {
     //     model: models.Users
