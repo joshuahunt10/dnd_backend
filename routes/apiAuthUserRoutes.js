@@ -14,29 +14,10 @@ router.get('/api/user', function(req, res){
     include:[
       {model: models.Characters}
     ]
-  }).then(function(user){
-    console.log(user);
-
-    const gameIds = user.Characters.map( c => c.GameId )
-
-    models.Games.find({
-      where: {id: gameIds}
-      }).then( games => {
-        if (games) {
-          user.Games = games
-        } else {
-          user.Games = []
-        }
-
-        // console.log({user})
-        /// TODO figure out how to get user to
-        ///   serialize Games in addition to Characters
-
-        res.json(user)
+  }).then((user) => {
+      res.json(user)
     })
-
   })
-})
 
 router.post('/api/user/char/create', function(req, res){
   let decoded = jwtDecode(req.headers.token)
@@ -50,12 +31,14 @@ router.post('/api/user/char/create', function(req, res){
     con: req.body.con,
     int: req.body.int,
     wis: req.body.wis,
+    cha: req.body.cha,
     subClass: req.body.subClass,
     subRace: req.body.subRace,
     alignment: req.body.alignment,
     background: req.body.background,
     level: req.body.level,
     skillProf: req.body.skillProf,
+    bio: req.body.bio,
     GameId: req.body.GameId,
     UserId: userID
   })
@@ -72,6 +55,19 @@ router.post('/api/user/char/create', function(req, res){
       success: false,
       err: err
     })
+  })
+})
+
+router.post('/api/user/onechar', (req, res) => {
+  // let decoded = jwtDecode(req.headers.token)
+  // let userID = decoded.data.id
+  models.Characters.findOne({
+    where:{
+      id: req.body.charId
+    }
+  })
+  .then((char) => {
+    res.json(char)
   })
 })
 
@@ -122,8 +118,8 @@ router.post('/api/games/create', function(req, res){
   })
   game.save().then(function(game){
     res.json({
-      'Game Created': true,
-      'Game Name': game.title
+      'gameCreated': true,
+      'gameName': game.title
     });
   })
 })

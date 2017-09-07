@@ -40,6 +40,13 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      cha: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      currentHP:{
+        type: Sequelize.INTEGER
+      },
       skillProf: {
         type: Sequelize.ARRAY(Sequelize.STRING)
       },
@@ -56,6 +63,9 @@ module.exports = {
         type: Sequelize.STRING
       },
       level: {
+        type: Sequelize.STRING
+      },
+      bio: {
         type: Sequelize.TEXT
       },
       createdAt: {
