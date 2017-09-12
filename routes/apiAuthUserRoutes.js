@@ -24,8 +24,10 @@ router.post('/api/user/char/create', function(req, res){
   let userID = decoded.data.id
   const char = models.Characters.build({
     charName: req.body.charName,
-    race: req.body.race,
-    class: req.body.class,
+    raceId: req.body.raceId,
+    classId: req.body.classId,
+    raceName: req.body.raceName,
+    className: req.body.className,
     str: req.body.str,
     dex: req.body.dex,
     con: req.body.con,
@@ -41,6 +43,16 @@ router.post('/api/user/char/create', function(req, res){
     bio: req.body.bio,
     hitDie: req.body.hitDie,
     GameId: req.body.GameId,
+    one: req.body.one,
+    two: req.body.two,
+    three: req.body.three,
+    four: req.body.four,
+    five: req.body.five,
+    six: req.body.six,
+    seven: req.body.seven,
+    eight: req.body.eight,
+    nine: req.body.nine,
+    spellList: req.body.spellList,
     UserId: userID
   })
   char.save().then(function(){

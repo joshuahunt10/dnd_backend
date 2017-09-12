@@ -12,13 +12,19 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      race: {
+      raceId: {
         type: Sequelize.INTEGER,
         allowNull: false
       },
-      class: {
+      classId: {
         type: Sequelize.INTEGER,
         allowNull: false
+      },
+      raceName: {
+        type: Sequelize.STRING
+      },
+      className: {
+        type: Sequelize.STRING
       },
       str: {
         type: Sequelize.STRING,
@@ -70,6 +76,36 @@ module.exports = {
       },
       bio: {
         type: Sequelize.TEXT
+      },
+      spellList: {
+        type: Sequelize.TEXT
+      },
+      one: {
+        type: Sequelize.INTEGER
+      },
+      two: {
+        type: Sequelize.INTEGER
+      },
+      three: {
+        type: Sequelize.INTEGER
+      },
+      four: {
+        type: Sequelize.INTEGER
+      },
+      five: {
+        type: Sequelize.INTEGER
+      },
+      six: {
+        type: Sequelize.INTEGER
+      },
+      seven: {
+        type: Sequelize.INTEGER
+      },
+      eight: {
+        type: Sequelize.INTEGER
+      },
+      nine: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
