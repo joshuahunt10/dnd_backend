@@ -18,6 +18,7 @@ module.exports = function(sequelize, DataTypes) {
     background: DataTypes.STRING,
     level: DataTypes.STRING,
     bio: DataTypes.TEXT,
+    hitDie: DataTypes.STRING,
     UserId: DataTypes.INTEGER,
     GameId: DataTypes.INTEGER
   }, {});

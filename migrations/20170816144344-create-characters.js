@@ -65,6 +65,9 @@ module.exports = {
       level: {
         type: Sequelize.STRING
       },
+      hitDie:{
+        type: Sequelize.STRING
+      },
       bio: {
         type: Sequelize.TEXT
       },

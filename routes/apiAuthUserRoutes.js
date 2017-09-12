@@ -39,6 +39,7 @@ router.post('/api/user/char/create', function(req, res){
     level: req.body.level,
     skillProf: req.body.skillProf,
     bio: req.body.bio,
+    hitDie: req.body.hitDie,
     GameId: req.body.GameId,
     UserId: userID
   })
@@ -121,6 +122,20 @@ router.post('/api/games/create', function(req, res){
       'gameCreated': true,
       'gameName': game.title
     });
+  })
+})
+
+router.patch('/api/char/update', (req, res) => {
+  models.Characters.update(
+    {con: req.body.con},
+    {where: {id: req.body.charId}})
+  .then(function(json){
+    res.json({
+      success: true
+    })
+  })
+  .catch(function(err){
+    console.log(err);
   })
 })
 
