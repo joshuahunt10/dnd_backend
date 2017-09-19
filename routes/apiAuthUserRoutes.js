@@ -34,6 +34,7 @@ router.post('/api/user/char/create', function(req, res){
     int: req.body.int,
     wis: req.body.wis,
     cha: req.body.cha,
+    currentHP: req.body.currentHP,
     subClass: req.body.subClass,
     subRace: req.body.subRace,
     alignment: req.body.alignment,
@@ -137,9 +138,30 @@ router.post('/api/games/create', function(req, res){
   })
 })
 
+//test this to make sure it all updates.
 router.patch('/api/char/update', (req, res) => {
+  console.log(req.body);
   models.Characters.update(
-    {con: req.body.con},
+    {
+      currentHP: parseInt(req.body.currentHP, 10),
+      str: req.body.str,
+      dex: req.body.dex,
+      con: req.body.con,
+      int: req.body.int,
+      wis: req.body.wis,
+      cha: req.body.cha,
+      level: req.body.level,
+      spellList: req.body.spellList,
+      one: req.body.one,
+      two: req.body.two,
+      three: req.body.three,
+      four: req.body.four,
+      five: req.body.five,
+      six: req.body.six,
+      seven: req.body.seven,
+      eight: req.body.eight,
+      nine: req.body.nine,
+    },
     {where: {id: req.body.charId}})
   .then(function(json){
     res.json({
