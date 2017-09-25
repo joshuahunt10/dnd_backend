@@ -128,7 +128,8 @@ router.post('/api/games/create', function(req, res){
 
   const game = models.Games.build({
     title: req.body.title,
-    adminUserId: userID
+    adminUserId: userID,
+    description: req.body.description
   })
   game.save().then(function(game){
     res.json({
