@@ -28,6 +28,7 @@
     "passport-jwt": "^3.0.0",
     "password-hash": "^1.2.2",
     "pg": "^7.1.2",
-    "sequelize": "^4.5.0"
+    "sequelize": "^4.5.0",
+    "sequelize-cli": "^3.0.0"
   }
 }
