@@ -8,6 +8,7 @@
     "yarn": "0.27.5"
   },
   "scripts": {
+    "start": "node app.js",
     "dev": "nodemon app.js -e js,mustache,css",
     "db:migrate": "./node_modules/sequelize-cli/lib/sequelize db:migrate",
     "test": "NODE_ENV=test jest --watch"

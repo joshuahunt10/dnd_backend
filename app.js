@@ -37,8 +37,8 @@ app.use(passport.authenticate('jwt', { session: false }), function(req, res, nex
 app.use(apiAuthUserRoutes)
 
 
-
-app.listen(4000, function(){
+const port = process.env.PORT || 4000
+app.listen(port, function(){
   console.log('I\'m going to get sick of DnD by the end of this')
 })
 
