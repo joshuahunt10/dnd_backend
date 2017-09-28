@@ -30,7 +30,12 @@ router.post('/api/authenticate', function(req, res){
       email: email
     }
   }).then(function(u){
-    if(passwordHash.verify(password, u.password)){
+    if(!u){
+      res.json({
+        success: false,
+        message: 'Username or password incorrect'
+      })
+    } else if(passwordHash.verify(password, u.password)){
       console.log('secret from auth route', secret.secret);
       var token = jwt.sign({
         exp: Math.floor(Date.now() / 1000) + (60 * 60),
@@ -43,12 +48,13 @@ router.post('/api/authenticate', function(req, res){
       })
 
     }
-    if(!u){
+    else{
       res.json({
         success: false,
         message: 'Username or password incorrect'
       })
     }
+
   })
 })
 
