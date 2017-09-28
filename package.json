@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon app.js -e js,mustache,css",
+    "db:migrate": "./node_modules/sequelize-cli/lib/sequelize db:migrate",
     "test": "NODE_ENV=test jest --watch"
   },
   "author": "",
