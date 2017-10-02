@@ -19,6 +19,15 @@ router.get('/api/user', function(req, res){
     })
   })
 
+  router.post('/api/userdetails', function(req, res){
+    models.Users.findOne({
+      where:{id: req.body.userId}
+    })
+    .then((user) => {
+        res.json(user)
+      })
+    })
+
 router.post('/api/user/char/create', function(req, res){
   let decoded = jwtDecode(req.headers.token)
   let userID = decoded.data.id
