@@ -32,7 +32,9 @@ module.exports = function(sequelize, DataTypes) {
     eight: DataTypes.INTEGER,
     nine: DataTypes.INTEGER,
     UserId: DataTypes.INTEGER,
-    GameId: DataTypes.INTEGER
+    GameId: DataTypes.INTEGER,
+    requestedRoll: DataTypes.BOOLEAN,
+    submittedRoll: DataTypes.STRING
   }, {});
 
   Characters.associate = function(models){

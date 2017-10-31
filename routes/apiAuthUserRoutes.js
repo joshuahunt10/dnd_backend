@@ -183,4 +183,20 @@ router.patch('/api/char/update', (req, res) => {
   })
 })
 
+router.get('/api/char/rollStatus', (req, res) => {
+  console.log('rollStatus good');
+  res.json({success: true})
+})
+
+router.post('/api/char/rollStatus', (req, res) => {
+  models.Characters.findOne({
+    where:{
+      id: req.body.charId
+    }
+  })
+  .then((char) => {
+    res.json({requestedRoll: char.requestedRoll})
+  })
+})
+
 module.exports = router;
