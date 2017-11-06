@@ -16,7 +16,15 @@ module.exports = {
         'submittedRoll',
         {
           type: Sequelize.STRING,
-          defaultValue: 'false'
+          defaultValue: '0'
+        }
+      ),
+      queryInterface.addColumn(
+        'Characters',
+        'rollMessage',
+        {
+          type: Sequelize.STRING,
+          defaultValue: ''
         }
       )
     ];
@@ -26,12 +34,16 @@ module.exports = {
   down: function (queryInterface, Sequelize) {
     return [
         queryInterface.removeColumn(
-        'Games',
+        'Characters',
         'requestedRoll'
       ),
       queryInterface.removeColumn(
-        'Games',
+        'Characters',
         'submittedRoll'
+      ),
+      queryInterface.removeColumn(
+        'Characters',
+        'rollMessage'
       )
     ]
   }

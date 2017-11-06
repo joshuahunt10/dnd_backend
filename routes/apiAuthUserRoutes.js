@@ -195,8 +195,58 @@ router.post('/api/char/rollStatus', (req, res) => {
     }
   })
   .then((char) => {
-    res.json({requestedRoll: char.requestedRoll})
+    res.json({
+      requestedRoll: char.requestedRoll,
+      rollMessage: char.rollMessage
+    })
   })
+})
+
+router.patch('/api/char/rollStatus', (req, res) => {
+  console.log('************************************', req.body.rollMessage)
+  models.Characters.update(
+    {
+      requestedRoll: req.body.rollStatus,
+      rollMessage: req.body.rollMessage
+    },
+    {where: {id: req.body.charId}})
+    .then(char => {
+      res.json({
+        requestedRoll: req.body.rollStatus
+      })
+    })
+
+    .catch(err => console.log(err))
+})
+
+router.post('/api/char/submitRollStatus', (req, res) => {
+  models.Characters.findOne({
+    where:{
+      id: req.body.charId
+    }
+  })
+  .then((char) => {
+    res.json({
+      submittedRoll: char.submittedRoll,
+      rollMessage: char.rollMessage
+    })
+  })
+})
+
+router.patch('/api/char/submitRollStatus', (req, res) => {
+  models.Characters.update(
+    {
+      submittedRoll: req.body.rollStatus,
+      requestedRoll: req.body.reqRoll
+    },
+    {where: {id: req.body.charId}})
+    .then(char => {
+      console.log("*************************",char);
+      res.json({
+        requestedRoll: 'Changed'
+      })
+    })
+    .catch(err => console.log(err))
 })
 
 module.exports = router;

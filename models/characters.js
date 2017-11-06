@@ -34,7 +34,8 @@ module.exports = function(sequelize, DataTypes) {
     UserId: DataTypes.INTEGER,
     GameId: DataTypes.INTEGER,
     requestedRoll: DataTypes.BOOLEAN,
-    submittedRoll: DataTypes.STRING
+    submittedRoll: DataTypes.STRING,
+    rollMessage: DataTypes.STRING
   }, {});
 
   Characters.associate = function(models){
