@@ -118,10 +118,6 @@ router.post('/api/games/details', function(req, res){
   models.Games.findOne({
     where: {id: req.body.id},
     include:[
-    //   {
-    //     model: models.Users
-    //
-    //   },
       {
         model: models.Characters,
       }
@@ -237,7 +233,8 @@ router.patch('/api/char/submitRollStatus', (req, res) => {
   models.Characters.update(
     {
       submittedRoll: req.body.rollStatus,
-      requestedRoll: req.body.reqRoll
+      requestedRoll: req.body.reqRoll,
+      rollMessage: req.body.rollMessage
     },
     {where: {id: req.body.charId}})
     .then(char => {
